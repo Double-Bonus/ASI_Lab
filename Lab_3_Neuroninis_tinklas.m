@@ -1,8 +1,9 @@
 close all, clear
 
+rng(20);
 load Lab1Duomenys.txt
-neuron_cnt = 40;
-koef = 0.3; % coeeficent of what percentage is used for test data
+neuron_cnt = 30;
+koef = 0.2; % coeeficent of what percentage is used for test data
 
 % Divide data training and testing
 ind=randperm(size(Lab1Duomenys,1)); %Gives index in random order !!!!!CAN CHANGE SEED!!!
@@ -45,7 +46,7 @@ Iejimas=[Y1; Y2];  %cia blogai?????
 for j = 1:2
     for i=1:length(TESTdata')                               % per ??jimus
         in=Iejimas(j,i);
-        for ii=1:neuron_cnt                      % per svorius INputo sluoksnio ir bias nepamirstam
+        for ii=1:length(INw)                     % per svorius INputo sluoksnio ir bias nepamirstam
             in_tmp=in*INw(ii,j)+B1w(ii);  
             inwin(ii)=2/(1+exp(-2*in_tmp))-1;       % per tansig funkcija
         end
