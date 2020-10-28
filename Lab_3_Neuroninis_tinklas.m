@@ -1,27 +1,14 @@
 close all, clear
 
-load Lab1Duomenys.txt
-neuron_cnt = 40;
-koef = 0.3; % coeeficent of what percentage is used for test data
-
-% Divide data to training and testing
-ind=randperm(size(Lab1Duomenys,1));             %Gives index in random order
-dalinam=round(size(Lab1Duomenys,1)*koef);       %we change porporsion of train and test data 
-TESTdata=Lab1Duomenys(ind(1:dalinam),:);        %from first till dalinam index
-TRAINdata=Lab1Duomenys(ind(dalinam+1:end),:);
+load Lab2data.mat
 
 % Davide data to inputs (IN) and outputs (OUT)
 INdataTEST=TESTdata(:,2:3)';                    %input to neuron net
 OUTdataTEST=TESTdata(:,4)';
 INdataTRAIN=TRAINdata(:,2:3)';
 OUTdataTRAIN=TRAINdata(:,4)';
-    
-%Train sensor with given neuron count
-net = feedforwardnet(neuron_cnt);
-net = train(net,INdataTRAIN,OUTdataTRAIN);
-%Testing with test data witch is never seen by net
-y = net(INdataTEST);
-perf = perform(net,y,OUTdataTEST) %calculate offset
+
+y = net(INdataTEST); % use MATLAB function
 
 %Get data of our neuron networks' parameters 
 INw=net.IW{1}           % input layer weights
